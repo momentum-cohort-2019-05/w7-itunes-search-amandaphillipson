@@ -7,14 +7,27 @@ function songNode (song) {
     const songDiv = document.createElement('div')
     songDiv.classList.add
     songDiv.innerHTML = `
-      <h2>${song.trackName}</h2>
-      <p>Artist: ${song.artistName}</p>
-      <p>Album: ${song.collectionName}</p>
-      <p>Genre: ${song.primaryGenreName}</p>
-      <div class="player">
-        <figure>
-            <audio controls src="${song.previewUrl}"></audio>
-        </figure>
+      <div class="song">
+        <div class="image">
+          <img class="albumCover" src="${song.artworkUrl100}">
+        </div>
+
+        <div class="specs">
+          <ul class="nobull">
+            <style type="text/css">.nobull {list-style-type: none; font-family: sans-serif;}</style>
+            <li>
+              <h2>${song.trackName}</h2>
+            </li>
+            <li>Artist: ${song.artistName}</li>
+            <li>Album: ${song.collectionName}</li>
+            <li>Genre: ${song.primaryGenreName}</li>
+          </ul>
+          <div class="player">
+            <figure>
+                <audio controls src="${song.previewUrl}"></audio>
+            </figure>
+          </div>
+        </div>
       </div>
       `
     return songDiv
@@ -37,7 +50,7 @@ function songNode (song) {
         `
       })
   }
-  
+
   
   document.addEventListener('DOMContentLoaded', function () {
     q('#song-results').addEventListener('click', function (event) {
@@ -60,6 +73,7 @@ function songNode (song) {
           resultsDiv.innerHTML = ''
           for (let song of data.results) {
             resultsDiv.appendChild(songNode(song))
+            
           }
         })
     })
